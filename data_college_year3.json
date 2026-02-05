@@ -1,19 +1,133 @@
 [
   {
-    "class": "College 3rd Year",
-    "subject": "BSc / BA / BCom Core",
-    "chapter": "General",
+    "class": "College Third Year",
+    "subject": "Physics",
+    "chapter": "Quantum Mechanics",
+    "importance": "High",
+    "tag": "Final Semester Exam",
     "templates": [
-      "Explain {{concept}}.",
-      "Evaluate {{concept}}."
+      "Explain {{concept}} with mathematical expression.",
+      "Derive {{concept}}.",
+      "Write short notes on {{concept}}.",
+      "Discuss applications of {{concept}}."
     ],
     "concepts": [
-      "Operating System",
-      "Financial Management",
-      "International Trade",
-      "Environmental Studies"
+      "Wave Function",
+      "Schrodinger Equation",
+      "Particle in a Box",
+      "Heisenberg Uncertainty Principle",
+      "Quantum Tunneling"
+    ]
+  },
+  {
+    "class": "College Third Year",
+    "subject": "Chemistry",
+    "chapter": "Coordination Compounds",
+    "importance": "High",
+    "tag": "Final Semester Exam",
+    "templates": [
+      "Explain {{concept}}.",
+      "Describe {{concept}} with examples.",
+      "Write short notes on {{concept}}."
     ],
-    "tag": "Suggestion",
-    "importance": "High"
+    "concepts": [
+      "Werner Theory",
+      "Ligands",
+      "Coordination Number",
+      "Isomerism",
+      "Chelation"
+    ]
+  },
+  {
+    "class": "College Third Year",
+    "subject": "Mathematics",
+    "chapter": "Numerical Methods",
+    "importance": "High",
+    "tag": "Final Semester Exam",
+    "templates": [
+      "Explain {{concept}}.",
+      "Solve problems using {{concept}}.",
+      "Discuss advantages of {{concept}}."
+    ],
+    "concepts": [
+      "Newton Raphson Method",
+      "Bisection Method",
+      "Interpolation",
+      "Numerical Integration",
+      "Numerical Differentiation"
+    ]
+  },
+  {
+    "class": "College Third Year",
+    "subject": "Computer Science",
+    "chapter": "Operating Systems",
+    "importance": "High",
+    "tag": "Final Semester Exam",
+    "templates": [
+      "Explain {{concept}} with diagrams.",
+      "Write short notes on {{concept}}.",
+      "Compare different types of {{concept}}."
+    ],
+    "concepts": [
+      "Process Management",
+      "Memory Management",
+      "CPU Scheduling",
+      "Deadlock",
+      "File System"
+    ]
+  },
+  {
+    "class": "College Third Year",
+    "subject": "Economics",
+    "chapter": "Development Economics",
+    "importance": "High",
+    "tag": "Final Semester Exam",
+    "templates": [
+      "Explain {{concept}}.",
+      "Discuss {{concept}} in detail."
+    ],
+    "concepts": [
+      "Economic Development",
+      "Poverty",
+      "Unemployment",
+      "Human Development Index",
+      "Sustainable Development"
+    ]
+  },
+  {
+    "class": "College Third Year",
+    "subject": "Commerce",
+    "chapter": "Financial Management",
+    "importance": "High",
+    "tag": "Final Semester Exam",
+    "templates": [
+      "Define {{concept}}.",
+      "Explain {{concept}} with examples."
+    ],
+    "concepts": [
+      "Financial Planning",
+      "Capital Structure",
+      "Working Capital",
+      "Dividend Policy",
+      "Investment Decisions"
+    ]
+  },
+  {
+    "class": "College Third Year",
+    "subject": "Management",
+    "chapter": "Strategic Management",
+    "importance": "High",
+    "tag": "Final Semester Exam",
+    "templates": [
+      "Explain {{concept}}.",
+      "Discuss {{concept}} with examples."
+    ],
+    "concepts": [
+      "Business Strategy",
+      "SWOT Analysis",
+      "Porter’s Five Forces",
+      "Corporate Strategy",
+      "Strategic Planning"
+    ]
   }
 ]
