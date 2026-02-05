@@ -1,8 +1,21 @@
-import json, random, requests
+import os
+import json
+import random
+import requests
 
-BOT_TOKEN = "এখানে_তোমার_BOT_TOKEN_পেস্ট_করো"
-CHANNEL_ID = "@smartstudynotes11"
+# =======================
+# ENV (GitHub Secrets)
+# =======================
+BOT_TOKEN = os.getenv("BOT_TOKEN")
+CHANNEL_ID = os.getenv("CHANNEL_ID")
+TIMEZONE = os.getenv("TIMEZONE", "Asia/Kolkata")
 
+if not BOT_TOKEN or not CHANNEL_ID:
+    raise ValueError("BOT_TOKEN or CHANNEL_ID is missing in GitHub Secrets")
+
+# =======================
+# DATA FILES
+# =======================
 FILES = [
     "data_class11.json",
     "data_class12.json",
@@ -11,53 +24,86 @@ FILES = [
     "data_college_year3.json"
 ]
 
-def load(path):
+POSTED_FILE = "posted_questions.json"
+
+# =======================
+# HELPERS
+# =======================
+def load_json(path, default):
+    if not os.path.exists(path):
+        return default
     with open(path, "r", encoding="utf-8") as f:
         return json.load(f)
 
-def save(path, data):
+def save_json(path, data):
     with open(path, "w", encoding="utf-8") as f:
-        json.dump(data, f, indent=2)
+        json.dump(data, f, indent=2, ensure_ascii=False)
 
-posted = load("posted_questions.json")
-message = "📘 *Smart Study Notes*\n━━━━━━━━━━━━━━━━━━\n🎯 *Exam Important Question (Suggestion)*\n\n"
-added = False
+# =======================
+# LOAD POSTED HISTORY
+# =======================
+posted = load_json(POSTED_FILE, {"posted": []})
 
-for file in FILES:
-    data = load(file)
-    item = random.choice(data)
-    template = random.choice(item["templates"])
-    concept = random.choice(item["concepts"])
-    question = template.replace("{{concept}}", concept)
-
-    key = f"{item['class']}-{item['subject']}-{question}"
-
-    if key not in posted["posted"]:
-        posted["posted"].append(key)
-        added = True
-
-        message += f"""
-📚 *Class:* {item['class']}
-📖 *Subject:* {item['subject']}
-🧩 *Chapter:* {item['chapter']}
-
-❓ *Question:*
-{question}
-
-🟢 *Importance:* {item['importance']}
-🏷️ *Type:* {item['tag']}
-
-━━━━━━━━━━━━━━━━━━
-"""
-
-if not added:
-    posted["posted"] = []
-
-message += "📌 Follow & Share: @smartstudynotes11\n#ExamSuggestion #StudyNotes"
-
-requests.post(
-    f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage",
-    data={"chat_id": CHANNEL_ID, "text": message, "parse_mode": "Markdown"}
+message = (
+    "📘 *Smart Study Notes*\n"
+    "━━━━━━━━━━━━━━━━━━\n"
+    "🎯 *Exam Important Question (Suggestion)*\n\n"
 )
 
-save("posted_questions.json", posted)
+added_any = False
+
+# =======================
+# PICK QUESTIONS
+# =======================
+for file in FILES:
+    data = load_json(file, [])
+
+    if not data:
+        continue
+
+    item = random.choice(data)
+
+    template = random.choice(item.get("templates", []))
+    concept = random.choice(item.get("concepts", []))
+    question = template.replace("{{concept}}", concept)
+
+    key = f"{item.get('class')}-{item.get('subject')}-{question}"
+
+    if key in posted["posted"]:
+        continue
+
+    posted["posted"].append(key)
+    added_any = True
+
+    message += (
+        f"📚 *Class:* {item.get('class')}\n"
+        f"📖 *Subject:* {item.get('subject')}\n"
+        f"🧩 *Chapter:* {item.get('chapter')}\n\n"
+        f"❓ *Question:*\n{question}\n\n"
+        f"🟢 *Importance:* {item.get('importance')}\n"
+        f"🏷️ *Type:* {item.get('tag')}\n"
+        "━━━━━━━━━━━━━━━━━━\n\n"
+    )
+
+# =======================
+# SEND TO TELEGRAM
+# =======================
+if added_any:
+    message += (
+        "📌 *Follow & Share:* @smartstudynotes11\n"
+        "#ExamSuggestion #StudyNotes"
+    )
+
+    url = f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage"
+    payload = {
+        "chat_id": CHANNEL_ID,
+        "text": message,
+        "parse_mode": "Markdown"
+    }
+
+    response = requests.post(url, json=payload, timeout=20)
+
+    if response.status_code != 200:
+        raise RuntimeError(f"Telegram API error: {response.text}")
+
+    save_json(POSTED_FILE, posted)
