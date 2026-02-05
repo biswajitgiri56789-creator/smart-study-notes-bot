@@ -1,0 +1,19 @@
+[
+  {
+    "class": "College 3rd Year",
+    "subject": "BSc / BA / BCom Core",
+    "chapter": "General",
+    "templates": [
+      "Explain {{concept}}.",
+      "Evaluate {{concept}}."
+    ],
+    "concepts": [
+      "Operating System",
+      "Financial Management",
+      "International Trade",
+      "Environmental Studies"
+    ],
+    "tag": "Suggestion",
+    "importance": "High"
+  }
+]

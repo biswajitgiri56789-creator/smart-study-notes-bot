@@ -1,0 +1,19 @@
+[
+  {
+    "class": "College 2nd Year",
+    "subject": "BSc / BA / BCom Core",
+    "chapter": "General",
+    "templates": [
+      "Explain {{concept}}.",
+      "Discuss {{concept}}."
+    ],
+    "concepts": [
+      "Data Structures",
+      "Macroeconomics",
+      "Indian Polity",
+      "Organic Reactions"
+    ],
+    "tag": "Suggestion",
+    "importance": "High"
+  }
+]

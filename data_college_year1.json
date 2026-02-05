@@ -1,0 +1,19 @@
+[
+  {
+    "class": "College 1st Year",
+    "subject": "BSc / BA / BCom Core",
+    "chapter": "General",
+    "templates": [
+      "Explain {{concept}}.",
+      "Write short note on {{concept}}."
+    ],
+    "concepts": [
+      "Calculus",
+      "Micro Economics",
+      "English Literature",
+      "Basic Physics"
+    ],
+    "tag": "Suggestion",
+    "importance": "High"
+  }
+]

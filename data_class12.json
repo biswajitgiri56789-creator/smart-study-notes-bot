@@ -1,0 +1,20 @@
+[
+  {
+    "class": "Class 12",
+    "subject": "Science / Commerce / Arts",
+    "chapter": "General",
+    "templates": [
+      "Explain {{concept}}.",
+      "Discuss {{concept}}."
+    ],
+    "concepts": [
+      "Electrostatics",
+      "Organic Chemistry",
+      "Genetics",
+      "Partnership Account",
+      "National Movement"
+    ],
+    "tag": "Suggestion",
+    "importance": "High"
+  }
+]

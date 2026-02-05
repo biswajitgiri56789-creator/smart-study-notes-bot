@@ -1,0 +1,22 @@
+[
+  {
+    "class": "Class 11",
+    "subject": "Physics / Chemistry / Math / Biology / Arts / Commerce",
+    "chapter": "General",
+    "templates": [
+      "Explain {{concept}}.",
+      "Define {{concept}}.",
+      "Write short note on {{concept}}."
+    ],
+    "concepts": [
+      "Laws of Motion",
+      "Atomic Structure",
+      "Trigonometry",
+      "Cell Structure",
+      "Basic Economics",
+      "Indian Constitution"
+    ],
+    "tag": "Suggestion",
+    "importance": "High"
+  }
+]
