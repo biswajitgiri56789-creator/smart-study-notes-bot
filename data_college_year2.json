@@ -1,19 +1,131 @@
 [
   {
-    "class": "College 2nd Year",
-    "subject": "BSc / BA / BCom Core",
-    "chapter": "General",
+    "class": "College Second Year",
+    "subject": "Physics",
+    "chapter": "Waves and Optics",
+    "importance": "High",
+    "tag": "Semester Exam",
+    "templates": [
+      "Explain {{concept}} with diagrams.",
+      "Derive the expression of {{concept}}.",
+      "Write short notes on {{concept}}."
+    ],
+    "concepts": [
+      "Wave Motion",
+      "Interference of Light",
+      "Diffraction",
+      "Polarization",
+      "Doppler Effect"
+    ]
+  },
+  {
+    "class": "College Second Year",
+    "subject": "Chemistry",
+    "chapter": "Thermodynamics",
+    "importance": "High",
+    "tag": "Semester Exam",
+    "templates": [
+      "Explain {{concept}}.",
+      "Derive {{concept}}.",
+      "Discuss the significance of {{concept}}."
+    ],
+    "concepts": [
+      "First Law of Thermodynamics",
+      "Second Law of Thermodynamics",
+      "Entropy",
+      "Gibbs Free Energy",
+      "Enthalpy"
+    ]
+  },
+  {
+    "class": "College Second Year",
+    "subject": "Mathematics",
+    "chapter": "Linear Algebra",
+    "importance": "High",
+    "tag": "Semester Exam",
+    "templates": [
+      "Define {{concept}}.",
+      "Explain {{concept}} with examples.",
+      "Solve problems based on {{concept}}."
+    ],
+    "concepts": [
+      "Matrices",
+      "Determinants",
+      "Eigen Values",
+      "Eigen Vectors",
+      "System of Linear Equations"
+    ]
+  },
+  {
+    "class": "College Second Year",
+    "subject": "Computer Science",
+    "chapter": "Data Structures",
+    "importance": "High",
+    "tag": "Semester Exam",
+    "templates": [
+      "Explain {{concept}} with examples.",
+      "Write short notes on {{concept}}."
+    ],
+    "concepts": [
+      "Arrays",
+      "Linked List",
+      "Stack",
+      "Queue",
+      "Trees"
+    ]
+  },
+  {
+    "class": "College Second Year",
+    "subject": "Economics",
+    "chapter": "Macro Economics",
+    "importance": "High",
+    "tag": "Semester Exam",
     "templates": [
       "Explain {{concept}}.",
       "Discuss {{concept}}."
     ],
     "concepts": [
-      "Data Structures",
-      "Macroeconomics",
-      "Indian Polity",
-      "Organic Reactions"
+      "Inflation",
+      "Deflation",
+      "Monetary Policy",
+      "Fiscal Policy",
+      "Business Cycles"
+    ]
+  },
+  {
+    "class": "College Second Year",
+    "subject": "Commerce",
+    "chapter": "Cost Accounting",
+    "importance": "High",
+    "tag": "Semester Exam",
+    "templates": [
+      "Define {{concept}}.",
+      "Explain {{concept}} with examples."
     ],
-    "tag": "Suggestion",
-    "importance": "High"
+    "concepts": [
+      "Costing",
+      "Fixed Cost",
+      "Variable Cost",
+      "Break Even Analysis",
+      "Marginal Costing"
+    ]
+  },
+  {
+    "class": "College Second Year",
+    "subject": "English",
+    "chapter": "Business Communication",
+    "importance": "Medium",
+    "tag": "Semester Exam",
+    "templates": [
+      "Explain {{concept}}.",
+      "Write short notes on {{concept}}."
+    ],
+    "concepts": [
+      "Business Letters",
+      "Report Writing",
+      "Presentation Skills",
+      "Interview Skills",
+      "Group Discussion"
+    ]
   }
 ]
