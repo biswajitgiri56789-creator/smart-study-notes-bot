@@ -1,22 +1,189 @@
 [
   {
     "class": "Class 11",
-    "subject": "Physics / Chemistry / Math / Biology / Arts / Commerce",
-    "chapter": "General",
+    "subject": "Physics",
+    "chapter": "Physical World & Units",
+    "importance": "High",
+    "tag": "Board + Competitive",
     "templates": [
-      "Explain {{concept}}.",
-      "Define {{concept}}.",
-      "Write short note on {{concept}}."
+      "Explain the concept of {{concept}}.",
+      "Derive and explain {{concept}}.",
+      "Write short notes on {{concept}}.",
+      "Why is {{concept}} important in physics?"
     ],
     "concepts": [
-      "Laws of Motion",
-      "Atomic Structure",
-      "Trigonometry",
-      "Cell Structure",
-      "Basic Economics",
-      "Indian Constitution"
+      "Dimensions and Units",
+      "Accuracy and Precision",
+      "Significant Figures",
+      "Measurement Errors",
+      "System of Units"
+    ]
+  },
+  {
+    "class": "Class 11",
+    "subject": "Chemistry",
+    "chapter": "Some Basic Concepts of Chemistry",
+    "importance": "High",
+    "tag": "Board",
+    "templates": [
+      "Explain {{concept}} with examples.",
+      "Define and explain {{concept}}.",
+      "Write short notes on {{concept}}."
     ],
-    "tag": "Suggestion",
-    "importance": "High"
+    "concepts": [
+      "Mole Concept",
+      "Law of Conservation of Mass",
+      "Stoichiometry",
+      "Atomic Mass",
+      "Molecular Mass"
+    ]
+  },
+  {
+    "class": "Class 11",
+    "subject": "Mathematics",
+    "chapter": "Sets and Relations",
+    "importance": "High",
+    "tag": "Board",
+    "templates": [
+      "Define {{concept}} with suitable examples.",
+      "Explain {{concept}}.",
+      "Write the properties of {{concept}}."
+    ],
+    "concepts": [
+      "Sets",
+      "Subsets",
+      "Power Set",
+      "Relations",
+      "Equivalence Relation"
+    ]
+  },
+  {
+    "class": "Class 11",
+    "subject": "Biology",
+    "chapter": "The Living World",
+    "importance": "High",
+    "tag": "Board + NEET",
+    "templates": [
+      "Explain {{concept}}.",
+      "Describe {{concept}} in detail.",
+      "Write short notes on {{concept}}."
+    ],
+    "concepts": [
+      "Characteristics of Living Organisms",
+      "Biodiversity",
+      "Taxonomy",
+      "Nomenclature",
+      "Classification of Living Organisms"
+    ]
+  },
+  {
+    "class": "Class 11",
+    "subject": "Economics",
+    "chapter": "Introduction to Economics",
+    "importance": "High",
+    "tag": "Board",
+    "templates": [
+      "Explain {{concept}}.",
+      "Discuss the importance of {{concept}}.",
+      "Write short notes on {{concept}}."
+    ],
+    "concepts": [
+      "Meaning of Economics",
+      "Micro Economics",
+      "Macro Economics",
+      "Economic Problem",
+      "Scarcity"
+    ]
+  },
+  {
+    "class": "Class 11",
+    "subject": "Political Science",
+    "chapter": "Indian Constitution",
+    "importance": "High",
+    "tag": "Board",
+    "templates": [
+      "Explain {{concept}}.",
+      "Describe the features of {{concept}}.",
+      "Why is {{concept}} important?"
+    ],
+    "concepts": [
+      "Indian Constitution",
+      "Preamble",
+      "Fundamental Rights",
+      "Directive Principles",
+      "Federalism"
+    ]
+  },
+  {
+    "class": "Class 11",
+    "subject": "History",
+    "chapter": "Early Societies",
+    "importance": "Medium",
+    "tag": "Board",
+    "templates": [
+      "Explain {{concept}}.",
+      "Write short notes on {{concept}}."
+    ],
+    "concepts": [
+      "Prehistoric Age",
+      "Harappan Civilization",
+      "Nomadic Societies",
+      "Pastoralism",
+      "Early Human Life"
+    ]
+  },
+  {
+    "class": "Class 11",
+    "subject": "Geography",
+    "chapter": "Physical Geography",
+    "importance": "High",
+    "tag": "Board",
+    "templates": [
+      "Explain {{concept}}.",
+      "Describe {{concept}} with examples."
+    ],
+    "concepts": [
+      "Earth Movements",
+      "Rocks",
+      "Plate Tectonics",
+      "Volcanoes",
+      "Earthquake"
+    ]
+  },
+  {
+    "class": "Class 11",
+    "subject": "Accountancy",
+    "chapter": "Introduction to Accounting",
+    "importance": "High",
+    "tag": "Board",
+    "templates": [
+      "Define {{concept}}.",
+      "Explain {{concept}} with examples."
+    ],
+    "concepts": [
+      "Accounting",
+      "Business Transactions",
+      "Assets and Liabilities",
+      "Capital",
+      "Revenue and Expenses"
+    ]
+  },
+  {
+    "class": "Class 11",
+    "subject": "Business Studies",
+    "chapter": "Business Environment",
+    "importance": "Medium",
+    "tag": "Board",
+    "templates": [
+      "Explain {{concept}}.",
+      "Discuss {{concept}}."
+    ],
+    "concepts": [
+      "Business Environment",
+      "Internal Environment",
+      "External Environment",
+      "Economic Environment",
+      "Political Environment"
+    ]
   }
 ]
