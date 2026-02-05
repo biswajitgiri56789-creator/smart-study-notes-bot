@@ -61,9 +61,7 @@ def save_posted(posted):
 
 
 def generate_question(concept, subject, chapter):
-    lang = detect_language(subject)
-
-    if lang == "bn":
+    if detect_language(subject) == "bn":
         return random.choice([
             f"{concept} কী? ব্যাখ্যা করো।",
             f"{chapter} অধ্যায়ের আলোকে {concept} আলোচনা করো।",
@@ -78,9 +76,8 @@ def generate_question(concept, subject, chapter):
             f"Describe {concept} in detail."
         ])
 
-
 # ===============================
-# MAIN LOGIC
+# MAIN MESSAGE BUILDER
 # ===============================
 def build_message():
     posted = load_posted()
@@ -93,7 +90,7 @@ def build_message():
 
     for class_name, file_name in DATA_FILES.items():
         data = load_json(file_name)
-        message += f"📚 **{class_name}**\n\n"
+        message += f"📚 {class_name}\n\n"
 
         for item in data:
             subject = item["subject"]
@@ -123,6 +120,9 @@ def build_message():
 
     save_posted(posted)
 
+    if len(message.strip()) < 50:
+        return None
+
     message += (
         "📌 Follow & Share: @smartstudynotes11\n"
         "#ExamSuggestion #SmartStudy"
@@ -134,20 +134,16 @@ def build_message():
 def send_to_telegram(text):
     payload = {
         "chat_id": CHANNEL_ID,
-        "text": text,
-        "parse_mode": "Markdown"
+        "text": text
     }
     requests.post(API_URL, data=payload)
 
 
-# ===============================
-# ENTRY POINT
-# ===============================
 def main():
-    tz = pytz.timezone(TIMEZONE)
-    now = datetime.now(tz)
-
     message = build_message()
+    if not message:
+        print("No new questions to post.")
+        return
     send_to_telegram(message)
 
 
