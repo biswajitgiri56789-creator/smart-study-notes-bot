@@ -1,109 +1,155 @@
 import os
 import json
 import random
+from datetime import datetime
+import pytz
 import requests
 
-# =======================
-# ENV (GitHub Secrets)
-# =======================
+# ===============================
+# ENV VARIABLES (DO NOT TOUCH)
+# ===============================
 BOT_TOKEN = os.getenv("BOT_TOKEN")
 CHANNEL_ID = os.getenv("CHANNEL_ID")
 TIMEZONE = os.getenv("TIMEZONE", "Asia/Kolkata")
 
-if not BOT_TOKEN or not CHANNEL_ID:
-    raise ValueError("BOT_TOKEN or CHANNEL_ID is missing in GitHub Secrets")
+# ===============================
+# CONSTANTS
+# ===============================
+API_URL = f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage"
 
-# =======================
-# DATA FILES
-# =======================
-FILES = [
-    "data_class11.json",
-    "data_class12.json",
-    "data_college_year1.json",
-    "data_college_year2.json",
-    "data_college_year3.json"
-]
+DATA_FILES = {
+    "Class 11": "data_class11.json",
+    "Class 12": "data_class12.json",
+    "College First Year": "data_college_year1.json",
+    "College Second Year": "data_college_year2.json",
+    "College Third Year": "data_college_year3.json"
+}
 
 POSTED_FILE = "posted_questions.json"
 
-# =======================
-# HELPERS
-# =======================
-def load_json(path, default):
-    if not os.path.exists(path):
-        return default
-    with open(path, "r", encoding="utf-8") as f:
+BANGLA_SUBJECTS = [
+    "Political Science",
+    "History",
+    "Geography",
+    "Economics",
+    "Business Studies",
+    "Accountancy"
+]
+
+# ===============================
+# UTILITY FUNCTIONS
+# ===============================
+def detect_language(subject):
+    return "bn" if subject in BANGLA_SUBJECTS else "en"
+
+
+def load_json(file):
+    with open(file, "r", encoding="utf-8") as f:
         return json.load(f)
 
-def save_json(path, data):
-    with open(path, "w", encoding="utf-8") as f:
-        json.dump(data, f, indent=2, ensure_ascii=False)
 
-# =======================
-# LOAD POSTED HISTORY
-# =======================
-posted = load_json(POSTED_FILE, {"posted": []})
+def load_posted():
+    if not os.path.exists(POSTED_FILE):
+        return set()
+    with open(POSTED_FILE, "r", encoding="utf-8") as f:
+        return set(json.load(f))
 
-message = (
-    "📘 *Smart Study Notes*\n"
-    "━━━━━━━━━━━━━━━━━━\n"
-    "🎯 *Exam Important Question (Suggestion)*\n\n"
-)
 
-added_any = False
+def save_posted(posted):
+    with open(POSTED_FILE, "w", encoding="utf-8") as f:
+        json.dump(list(posted), f, ensure_ascii=False, indent=2)
 
-# =======================
-# PICK QUESTIONS
-# =======================
-for file in FILES:
-    data = load_json(file, [])
 
-    if not data:
-        continue
+def generate_question(concept, subject, chapter):
+    lang = detect_language(subject)
 
-    item = random.choice(data)
+    if lang == "bn":
+        return random.choice([
+            f"{concept} কী? ব্যাখ্যা করো।",
+            f"{chapter} অধ্যায়ের আলোকে {concept} আলোচনা করো।",
+            f"{concept} কেন গুরুত্বপূর্ণ?",
+            f"{concept} বিস্তারিতভাবে বর্ণনা করো।"
+        ])
+    else:
+        return random.choice([
+            f"What is {concept}? Explain.",
+            f"Discuss {concept} with reference to {chapter}.",
+            f"Why is {concept} important?",
+            f"Describe {concept} in detail."
+        ])
 
-    template = random.choice(item.get("templates", []))
-    concept = random.choice(item.get("concepts", []))
-    question = template.replace("{{concept}}", concept)
 
-    key = f"{item.get('class')}-{item.get('subject')}-{question}"
+# ===============================
+# MAIN LOGIC
+# ===============================
+def build_message():
+    posted = load_posted()
 
-    if key in posted["posted"]:
-        continue
-
-    posted["posted"].append(key)
-    added_any = True
-
-    message += (
-        f"📚 *Class:* {item.get('class')}\n"
-        f"📖 *Subject:* {item.get('subject')}\n"
-        f"🧩 *Chapter:* {item.get('chapter')}\n\n"
-        f"❓ *Question:*\n{question}\n\n"
-        f"🟢 *Importance:* {item.get('importance')}\n"
-        f"🏷️ *Type:* {item.get('tag')}\n"
-        "━━━━━━━━━━━━━━━━━━\n\n"
+    message = (
+        "📘 Smart Study Notes\n"
+        "━━━━━━━━━━━━━━━━━━\n"
+        "🎯 Exam Important Questions (Suggestion)\n\n"
     )
 
-# =======================
-# SEND TO TELEGRAM
-# =======================
-if added_any:
+    for class_name, file_name in DATA_FILES.items():
+        data = load_json(file_name)
+        message += f"📚 **{class_name}**\n\n"
+
+        for item in data:
+            subject = item["subject"]
+            chapter = item["chapter"]
+            importance = item["importance"]
+            tag = item["tag"]
+
+            concept = random.choice(item["concepts"])
+            question = generate_question(concept, subject, chapter)
+
+            unique_key = f"{class_name}|{subject}|{chapter}|{question}"
+            if unique_key in posted:
+                continue
+
+            posted.add(unique_key)
+
+            label = "প্রশ্ন" if detect_language(subject) == "bn" else "Question"
+
+            message += (
+                f"📖 Subject: {subject}\n"
+                f"🧩 Chapter: {chapter}\n"
+                f"❓ {label}: {question}\n"
+                f"🟢 Importance: {importance}\n"
+                f"🏷️ Exam Type: {tag}\n"
+                "━━━━━━━━━━━━━━━━━━\n"
+            )
+
+    save_posted(posted)
+
     message += (
-        "📌 *Follow & Share:* @smartstudynotes11\n"
-        "#ExamSuggestion #StudyNotes"
+        "📌 Follow & Share: @smartstudynotes11\n"
+        "#ExamSuggestion #SmartStudy"
     )
 
-    url = f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage"
+    return message
+
+
+def send_to_telegram(text):
     payload = {
         "chat_id": CHANNEL_ID,
-        "text": message,
+        "text": text,
         "parse_mode": "Markdown"
     }
+    requests.post(API_URL, data=payload)
 
-    response = requests.post(url, json=payload, timeout=20)
 
-    if response.status_code != 200:
-        raise RuntimeError(f"Telegram API error: {response.text}")
+# ===============================
+# ENTRY POINT
+# ===============================
+def main():
+    tz = pytz.timezone(TIMEZONE)
+    now = datetime.now(tz)
 
-    save_json(POSTED_FILE, posted)
+    message = build_message()
+    send_to_telegram(message)
+
+
+if __name__ == "__main__":
+    main()
