@@ -1,19 +1,150 @@
 [
   {
-    "class": "College 1st Year",
-    "subject": "BSc / BA / BCom Core",
-    "chapter": "General",
+    "class": "College First Year",
+    "subject": "Physics",
+    "chapter": "Mechanics",
+    "importance": "High",
+    "tag": "Semester Exam",
     "templates": [
-      "Explain {{concept}}.",
-      "Write short note on {{concept}}."
+      "Explain {{concept}} with derivation.",
+      "Derive the expression of {{concept}}.",
+      "Write short notes on {{concept}}.",
+      "Discuss the applications of {{concept}}."
     ],
     "concepts": [
-      "Calculus",
-      "Micro Economics",
-      "English Literature",
-      "Basic Physics"
+      "Newton's Laws of Motion",
+      "Work, Energy and Power",
+      "Centre of Mass",
+      "Rotational Motion",
+      "Conservation of Momentum"
+    ]
+  },
+  {
+    "class": "College First Year",
+    "subject": "Chemistry",
+    "chapter": "Atomic Structure",
+    "importance": "High",
+    "tag": "Semester Exam",
+    "templates": [
+      "Explain {{concept}}.",
+      "Describe {{concept}} with diagrams.",
+      "Write short notes on {{concept}}."
     ],
-    "tag": "Suggestion",
-    "importance": "High"
+    "concepts": [
+      "Bohr Atomic Model",
+      "Quantum Numbers",
+      "Electronic Configuration",
+      "Heisenberg Uncertainty Principle",
+      "Wave Nature of Electron"
+    ]
+  },
+  {
+    "class": "College First Year",
+    "subject": "Mathematics",
+    "chapter": "Calculus",
+    "importance": "High",
+    "tag": "Semester Exam",
+    "templates": [
+      "Define {{concept}} and explain.",
+      "Solve problems based on {{concept}}.",
+      "Explain the applications of {{concept}}."
+    ],
+    "concepts": [
+      "Limits",
+      "Continuity",
+      "Differentiation",
+      "Integration",
+      "Maxima and Minima"
+    ]
+  },
+  {
+    "class": "College First Year",
+    "subject": "Biology",
+    "chapter": "Cell Biology",
+    "importance": "High",
+    "tag": "Semester Exam",
+    "templates": [
+      "Describe {{concept}}.",
+      "Explain the structure and function of {{concept}}."
+    ],
+    "concepts": [
+      "Cell Structure",
+      "Cell Membrane",
+      "Mitochondria",
+      "Cell Cycle",
+      "Cell Division"
+    ]
+  },
+  {
+    "class": "College First Year",
+    "subject": "Computer Science",
+    "chapter": "Programming Fundamentals",
+    "importance": "High",
+    "tag": "Semester Exam",
+    "templates": [
+      "Explain {{concept}} with examples.",
+      "Write short notes on {{concept}}."
+    ],
+    "concepts": [
+      "Algorithms",
+      "Flowcharts",
+      "Programming Languages",
+      "Data Types",
+      "Control Structures"
+    ]
+  },
+  {
+    "class": "College First Year",
+    "subject": "Economics",
+    "chapter": "Micro Economics",
+    "importance": "High",
+    "tag": "Semester Exam",
+    "templates": [
+      "Explain {{concept}}.",
+      "Discuss the importance of {{concept}}."
+    ],
+    "concepts": [
+      "Demand",
+      "Supply",
+      "Elasticity of Demand",
+      "Utility Analysis",
+      "Consumer Equilibrium"
+    ]
+  },
+  {
+    "class": "College First Year",
+    "subject": "English",
+    "chapter": "Communication Skills",
+    "importance": "Medium",
+    "tag": "Semester Exam",
+    "templates": [
+      "Explain {{concept}}.",
+      "Write short notes on {{concept}}."
+    ],
+    "concepts": [
+      "Communication Process",
+      "Barriers to Communication",
+      "Listening Skills",
+      "Speaking Skills",
+      "Professional Writing"
+    ]
+  },
+  {
+    "class": "College First Year",
+    "subject": "Political Science",
+    "chapter": "Political Theory",
+    "importance": "Medium",
+    "tag": "Semester Exam",
+    "templates": [
+      "Explain {{concept}}.",
+      "Discuss {{concept}}."
+    ],
+    "concepts": [
+      "State",
+      "Nation",
+      "Liberty",
+      "Equality",
+      "Justice"
+    ]
   }
 ]
