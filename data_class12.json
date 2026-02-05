@@ -1,20 +1,188 @@
 [
   {
     "class": "Class 12",
-    "subject": "Science / Commerce / Arts",
-    "chapter": "General",
+    "subject": "Physics",
+    "chapter": "Electrostatics",
+    "importance": "High",
+    "tag": "Board + Competitive",
+    "templates": [
+      "Explain the concept of {{concept}}.",
+      "Derive and explain {{concept}}.",
+      "Write short notes on {{concept}}.",
+      "Why is {{concept}} important?"
+    ],
+    "concepts": [
+      "Coulomb's Law",
+      "Electric Field",
+      "Electric Potential",
+      "Gauss's Law",
+      "Capacitance"
+    ]
+  },
+  {
+    "class": "Class 12",
+    "subject": "Chemistry",
+    "chapter": "Solutions",
+    "importance": "High",
+    "tag": "Board",
+    "templates": [
+      "Explain {{concept}}.",
+      "Define and explain {{concept}}.",
+      "Write short notes on {{concept}}."
+    ],
+    "concepts": [
+      "Concentration of Solutions",
+      "Raoult’s Law",
+      "Colligative Properties",
+      "Molarity",
+      "Molality"
+    ]
+  },
+  {
+    "class": "Class 12",
+    "subject": "Mathematics",
+    "chapter": "Relations and Functions",
+    "importance": "High",
+    "tag": "Board",
+    "templates": [
+      "Define {{concept}}.",
+      "Explain {{concept}} with examples.",
+      "Write properties of {{concept}}."
+    ],
+    "concepts": [
+      "Relations",
+      "Functions",
+      "One-One Function",
+      "Onto Function",
+      "Composite Function"
+    ]
+  },
+  {
+    "class": "Class 12",
+    "subject": "Biology",
+    "chapter": "Reproduction in Organisms",
+    "importance": "High",
+    "tag": "Board + NEET",
+    "templates": [
+      "Explain {{concept}}.",
+      "Describe {{concept}} in detail.",
+      "Write short notes on {{concept}}."
+    ],
+    "concepts": [
+      "Asexual Reproduction",
+      "Sexual Reproduction",
+      "Human Reproduction",
+      "Gametogenesis",
+      "Fertilization"
+    ]
+  },
+  {
+    "class": "Class 12",
+    "subject": "Economics",
+    "chapter": "National Income",
+    "importance": "High",
+    "tag": "Board",
+    "templates": [
+      "Explain {{concept}}.",
+      "Define {{concept}}.",
+      "Discuss {{concept}}."
+    ],
+    "concepts": [
+      "National Income",
+      "GDP",
+      "GNP",
+      "Value Added Method",
+      "Income Method"
+    ]
+  },
+  {
+    "class": "Class 12",
+    "subject": "Political Science",
+    "chapter": "Contemporary World Politics",
+    "importance": "High",
+    "tag": "Board",
+    "templates": [
+      "Explain {{concept}}.",
+      "Discuss the importance of {{concept}}."
+    ],
+    "concepts": [
+      "Cold War",
+      "NAM",
+      "Globalization",
+      "Unipolar World",
+      "Bipolar World"
+    ]
+  },
+  {
+    "class": "Class 12",
+    "subject": "History",
+    "chapter": "Freedom Movement",
+    "importance": "High",
+    "tag": "Board",
+    "templates": [
+      "Explain {{concept}}.",
+      "Write short notes on {{concept}}."
+    ],
+    "concepts": [
+      "Non-Cooperation Movement",
+      "Civil Disobedience Movement",
+      "Quit India Movement",
+      "Role of Gandhi",
+      "Indian National Congress"
+    ]
+  },
+  {
+    "class": "Class 12",
+    "subject": "Geography",
+    "chapter": "Human Geography",
+    "importance": "Medium",
+    "tag": "Board",
+    "templates": [
+      "Explain {{concept}}.",
+      "Describe {{concept}}."
+    ],
+    "concepts": [
+      "Population Growth",
+      "Migration",
+      "Human Development",
+      "Settlement Types",
+      "Urbanization"
+    ]
+  },
+  {
+    "class": "Class 12",
+    "subject": "Accountancy",
+    "chapter": "Company Accounts",
+    "importance": "High",
+    "tag": "Board",
+    "templates": [
+      "Define {{concept}}.",
+      "Explain {{concept}} with examples."
+    ],
+    "concepts": [
+      "Shares",
+      "Debentures",
+      "Issue of Shares",
+      "Redemption of Debentures",
+      "Final Accounts"
+    ]
+  },
+  {
+    "class": "Class 12",
+    "subject": "Business Studies",
+    "chapter": "Marketing Management",
+    "importance": "High",
+    "tag": "Board",
     "templates": [
       "Explain {{concept}}.",
       "Discuss {{concept}}."
     ],
     "concepts": [
-      "Electrostatics",
-      "Organic Chemistry",
-      "Genetics",
-      "Partnership Account",
-      "National Movement"
-    ],
-    "tag": "Suggestion",
-    "importance": "High"
+      "Marketing",
+      "Marketing Mix",
+      "Advertising",
+      "Sales Promotion",
+      "Branding"
+    ]
   }
 ]
