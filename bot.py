@@ -5,84 +5,82 @@ import requests
 from datetime import datetime
 import pytz
 
-# ===============================
-# ENV (DO NOT CHANGE)
-# ===============================
 BOT_TOKEN = os.getenv("BOT_TOKEN")
 CHANNEL_ID = os.getenv("CHANNEL_ID")
 TIMEZONE = os.getenv("TIMEZONE", "Asia/Kolkata")
 
 API_URL = f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage"
 
-# ===============================
-# DATA FILES
-# ===============================
 DATA_FILES = {
     "Class 11": "data_class11.json",
     "Class 12": "data_class12.json",
     "College First Year": "data_college_year1.json",
     "College Second Year": "data_college_year2.json",
-    "College Third Year": "data_college_year3.json",
+    "College Third Year": "data_college_year3.json"
 }
 
 POSTED_FILE = "posted_questions.json"
 
-BANGLA_SUBJECTS = {
-    "Political Science",
-    "History",
-    "Geography",
-    "Economics",
-    "Business Studies",
-    "Accountancy"
-}
+BANGLA_SUBJECTS = [
+    "Political Science", "History", "Geography",
+    "Economics", "Business Studies", "Accountancy"
+]
 
-# ===============================
-# HELPERS
-# ===============================
-def is_bangla(subject):
-    return subject in BANGLA_SUBJECTS
+# ---------- Helpers ----------
 
 def load_json(path):
     with open(path, "r", encoding="utf-8") as f:
         return json.load(f)
 
-def load_posted():
-    if not os.path.exists(POSTED_FILE):
-        return set()
-    with open(POSTED_FILE, "r", encoding="utf-8") as f:
-        return set(json.load(f))
+def save_json(path, data):
+    with open(path, "w", encoding="utf-8") as f:
+        json.dump(data, f, ensure_ascii=False, indent=2)
 
-def save_posted(posted):
-    with open(POSTED_FILE, "w", encoding="utf-8") as f:
-        json.dump(list(posted), f, ensure_ascii=False, indent=2)
+def detect_lang(subject):
+    return "bn" if subject in BANGLA_SUBJECTS else "en"
 
-def make_question(concept, chapter, subject):
-    if is_bangla(subject):
+def today_date():
+    tz = pytz.timezone(TIMEZONE)
+    return datetime.now(tz).strftime("%Y-%m-%d")
+
+def auto_reset():
+    data = load_json(POSTED_FILE)
+    if data["date"] != today_date():
+        data["date"] = today_date()
+        data["posted"] = []
+        save_json(POSTED_FILE, data)
+    return data
+
+def ai_generate_question(concept, chapter, subject):
+    bn = detect_lang(subject) == "bn"
+    if bn:
         return random.choice([
             f"{concept} কী? ব্যাখ্যা করো।",
             f"{chapter} অধ্যায়ের আলোকে {concept} আলোচনা করো।",
             f"{concept} কেন গুরুত্বপূর্ণ?",
-            f"{concept} বিস্তারিতভাবে লেখো।"
+            f"{concept} সংক্ষেপে লেখো।"
         ])
     else:
         return random.choice([
             f"What is {concept}? Explain.",
             f"Discuss {concept} with reference to {chapter}.",
             f"Why is {concept} important?",
-            f"Describe {concept} in detail."
+            f"Write short notes on {concept}."
         ])
 
-# ===============================
-# BUILD MESSAGE
-# ===============================
+# ---------- Main Logic ----------
+
 def build_message():
-    posted = load_posted()
+    posted_data = auto_reset()
+    posted = set(posted_data["posted"])
 
     msg = (
         "📘 *Smart Study Notes*\n"
         "━━━━━━━━━━━━━━━━━━\n"
-        "🎯 *Exam Important Questions*\n\n"
+        "🎯 *Exam Important Questions (Suggestion)*\n\n"
     )
+
+    new_added = False
 
     for class_name, file in DATA_FILES.items():
         data = load_json(file)
@@ -91,41 +89,39 @@ def build_message():
         for item in data:
             subject = item["subject"]
             chapter = item["chapter"]
-            importance = item["importance"]
-            exam = item["tag"]
+            importance = item.get("importance", "High")
+            tag = item.get("tag", "Exam")
 
             concept = random.choice(item["concepts"])
-            question = make_question(concept, chapter, subject)
+            question = ai_generate_question(concept, chapter, subject)
 
             key = f"{class_name}|{subject}|{chapter}|{question}"
             if key in posted:
                 continue
 
             posted.add(key)
+            new_added = True
 
-            label = "প্রশ্ন" if is_bangla(subject) else "Question"
+            q_label = "প্রশ্ন" if detect_lang(subject) == "bn" else "Question"
 
             msg += (
-                f"📖 *Subject:* {subject}\n"
-                f"🧩 *Chapter:* {chapter}\n"
-                f"❓ *{label}:* {question}\n"
-                f"🟢 *Importance:* {importance}\n"
-                f"🏷️ *Exam:* {exam}\n"
+                f"📖 Subject: {subject}\n"
+                f"🧩 Chapter: {chapter}\n"
+                f"❓ {q_label}: {question}\n"
+                f"🟢 Importance: {importance}\n"
+                f"🏷️ Type: {tag}\n"
                 "━━━━━━━━━━━━━━━━━━\n"
             )
 
-    save_posted(posted)
+    if not new_added:
+        return None
 
-    msg += (
-        "📌 Follow & Share: @smartstudynotes11\n"
-        "#ExamSuggestion #SmartStudy"
-    )
+    posted_data["posted"] = list(posted)
+    save_json(POSTED_FILE, posted_data)
 
+    msg += "\n📌 Follow & Share: @smartstudynotes11\n#SmartStudy #ExamSuggestion"
     return msg
 
-# ===============================
-# SEND
-# ===============================
 def send_message(text):
     requests.post(API_URL, data={
         "chat_id": CHANNEL_ID,
@@ -133,16 +129,10 @@ def send_message(text):
         "parse_mode": "Markdown"
     })
 
-# ===============================
-# MAIN
-# ===============================
 def main():
-    tz = pytz.timezone(TIMEZONE)
-    _ = datetime.now(tz)
-
-    message = build_message()
-    if message.strip():
-        send_message(message)
+    msg = build_message()
+    if msg:
+        send_message(msg)
 
 if __name__ == "__main__":
     main()
